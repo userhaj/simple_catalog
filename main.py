@@ -25,13 +25,13 @@ class App:
         movie_content['pady'] = 10
 
         # Content to display
-        movie_ui = MovieUI(movie_content, self.Db)
+        self.movie_ui = MovieUI(movie_content, self.Db)
 
         # Menu Bar
         menubar = tk.Menu(master)
         filemenu = tk.Menu(menubar, tearoff=0)
         filemenu.add_command(label='Add Folder', command=self.add_folder)
-        filemenu.add_command(label='Refresh List', command=movie_ui.update_movie_list)
+        filemenu.add_command(label='Refresh List', command=self.movie_ui.update_movie_list)
         filemenu.add_command(label='Update Details', command=self.update_movie_details_thread)
         menubar.add_cascade(label='File', menu=filemenu)
         master.config(menu=menubar)
@@ -62,7 +62,7 @@ class App:
             self.status_string.set('Adding: ' + file)
             self.Db.add_file(file)
         self.status_string.set('')
-        self.update_movie_list()
+        self.movie_ui.update_movie_list()
 
     def update_movie_details_thread(self):
         threading.Thread(target=self.Db.update_all_details).start()
