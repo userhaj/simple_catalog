@@ -74,11 +74,11 @@ def imdb_get_movie_url(title_name):
     site_source = urllib.request.urlopen(site_request)
     site_soup = bs.BeautifulSoup(site_source, 'html.parser')
 
-    return 'http://' + site_soup.find('cite').text
+    return site_soup.find('cite').text
 
 
 if __name__ == '__main__':
-    movie = 'Avengers Infinity War'
+    movie = 'A great movie name'
     imdb_url = imdb_get_movie_url(movie)
     Imdb = ImdbGet(imdb_url)
     print(Imdb)
